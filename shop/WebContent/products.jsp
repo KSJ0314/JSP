@@ -23,11 +23,17 @@
 			<%
 				ArrayList<Product> listOfProduct = new ProductRepository().getAllProducts();
 				for (Product lp : listOfProduct) {
+					String productId = lp.getProductId();
 			%>
 					<div class="col-md-4">
-						<h3><%=lp.getPname()%></h3>
-						<h3><%=lp.getDescription()%></h3>
-						<h3><%=lp.getUnitPrice()%></h3>
+						<img src="resources/images/<%=productId %>.png" style="with: 100%">
+						<div id="box">
+							<h3><%=lp.getPname()%></h3>
+							<h3><%=lp.getDescription()%></h3>
+							<h3><%=lp.getUnitPrice()%></h3>
+						</div>
+						<p><a href="product.jsp?id=<%=productId%>"
+						class="btn btn-secondary" role="button">버튼</a></p>
 					</div>
 			<%
 				}

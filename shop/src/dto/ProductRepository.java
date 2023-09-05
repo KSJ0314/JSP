@@ -36,4 +36,16 @@ public class ProductRepository {
 	public ArrayList<Product> getAllProducts(){
 		return listOfProduct;
 	}
+	
+	public Product getProductById(String productId) {
+		Product productById = null;
+		for (Product product : listOfProduct){
+			if (productId != null && product.getProductId().equals(productId)){
+				productById = product;
+				break;
+			}
+		}
+		return productById;
+	}
+	
 }
