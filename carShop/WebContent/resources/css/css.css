@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+img {
+	width: 500px;
+	height: 300px;
+}
+
+table, tr, td{
+	border: 1px solid black;
+	text-align: center;
+}
+
+table {
+	float: left;
+	margin-right: 10px;
+}

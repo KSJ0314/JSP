@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="head.jsp" %>
-		<h1>깜찍이 의류 쇼핑몰에 오신걸 환영합니다!!</h1>
-	<%@ include file="bottom.jsp" %>
+	<%
+		request.setCharacterEncoding("utf-8");
+		String requestPerson = request.getParameter("requestPerson");
+	%>
+	
+	<h3>Forward2 : <%=requestPerson %></h3>
 </body>
 </html>
