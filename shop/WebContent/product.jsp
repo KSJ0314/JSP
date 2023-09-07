@@ -19,8 +19,15 @@
 		</div>
 	</div>
 	<%
+/* 		ProductRepository pr = null;
+		if(session.getAttribute("pr")==null){
+			pr = new ProductRepository();
+		} else {
+			pr = (ProductRepository)session.getAttribute("pr");
+		} */
+		ProductRepository pr = new ProductRepository().getInstance();
 		String id = request.getParameter("id");
-		Product product = new ProductRepository().getProductById(id);
+		Product product = pr.getProductById(id);
 	%>
 	<div class="container">
 		<div class="row">

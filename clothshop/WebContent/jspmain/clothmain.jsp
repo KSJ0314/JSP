@@ -16,7 +16,6 @@
 		border: 1px solid gray;
 	}
 	#container{
-		width: 900px;
 		margin: auto;
 	}
 	#aa{
@@ -29,16 +28,17 @@
 <body>
 	<%@ include file="head.jsp" %>
 	<%
-		ArrayList<Cloth> listOfCloth = new ClothRepository().getListOfCloth();
+		ClothRepository cr = new ClothRepository().getinstance();
+		ArrayList<Cloth> listOfCloth = cr.getListOfCloth();
 	%>
-		<div id="container">
+		<div id="container" style="width: <%=listOfCloth.size()*300 %>px;">
 	<%
 		for (Cloth cloth : listOfCloth){
 	%>
 			<div id="cloth">
 				<img src="../resources/images/<%=cloth.getClothId() %>.jpg" style="width: 100%">
-				<h5>상품 아이디 : <%=cloth.getClothId() %></h5>
 				<h5>상품명 : <%=cloth.getClothName() %></h5>
+				<h5>상품가격 : <%=cloth.getClothCost() %></h5>
 				<a href="clothone.jsp?id=<%=cloth.getClothId() %>" class="btn btn-info" id="aa">상세 보기</a>
 			</div>
 	<%

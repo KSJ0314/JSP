@@ -40,7 +40,7 @@
 </head>
 <body>
 	<%@ include file="menu.jsp" %>
-	<div class="jumbotron">
+	<div class="jumbotron" style="text-align: center;">
 		<div class="container">
 			<h1 class="display-3">
 				<%=greeting %>

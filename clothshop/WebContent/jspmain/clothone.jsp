@@ -20,7 +20,8 @@
 	<%@ include file="head.jsp" %>
 	<%
 		String id = request.getParameter("id");
-		Cloth cloth = new ClothRepository().getCloth(id);
+		ClothRepository cr = new ClothRepository().getinstance();
+		Cloth cloth = cr.getCloth(id);
 	%>
 	<div id="img">
 		<img src="../resources/images/<%=cloth.getClothId() %>.jpg" style="width: 100%">

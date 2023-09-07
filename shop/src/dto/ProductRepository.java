@@ -6,6 +6,11 @@ public class ProductRepository {
 	
 	private ArrayList<Product> listOfProduct = new ArrayList<>();
 	
+	private static ProductRepository instance = new ProductRepository();
+	public static ProductRepository getInstance() {
+		return instance;
+	}
+	
 	public ProductRepository() {
 		Product phone = new Product("P1234", "아이폰 15Pro",2200000);
 		phone.setDescription("6.7인치 OLED 디스플레이, 후면 카메라 3대, 전면 카메라 1대");
@@ -46,6 +51,10 @@ public class ProductRepository {
 			}
 		}
 		return productById;
+	}
+	
+	public void addProduct(Product product) {
+		listOfProduct.add(product);
 	}
 	
 }

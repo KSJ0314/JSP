@@ -21,7 +21,13 @@
 	<div class="container">
 		<div class="row" align="center">
 			<%
-				ArrayList<Product> listOfProduct = new ProductRepository().getAllProducts();
+/* 				if(session.getAttribute("pr")==null){
+					session.setAttribute("pr", new ProductRepository());
+				}
+				ProductRepository pr = (ProductRepository)session.getAttribute("pr"); */
+				ProductRepository pr = new ProductRepository().getInstance();
+				
+				ArrayList<Product> listOfProduct = pr.getAllProducts();
 				for (Product lp : listOfProduct) {
 					String productId = lp.getProductId();
 			%>
@@ -33,7 +39,7 @@
 							<h3><%=lp.getUnitPrice()%></h3>
 						</div>
 						<p><a href="product.jsp?id=<%=productId%>"
-						class="btn btn-secondary" role="button">버튼</a></p>
+						class="btn btn-secondary" role="button">상세보기</a></p>
 					</div>
 			<%
 				}

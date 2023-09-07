@@ -15,6 +15,7 @@
 	<div id="head">
 		<a href="main.jsp" class="btn btn-secondary">Home</a>
 		<a href="clothmain.jsp" class="btn btn-secondary">주문하기</a>
+		<a href="clothAdd.jsp" class="btn btn-secondary">상품등록</a>
 	</div>
 </body>
 </html>

@@ -5,6 +5,11 @@ import java.util.ArrayList;
 public class ClothRepository {
 	
 	private ArrayList<Cloth> listOfCloth = new ArrayList<>();
+	private static ClothRepository instance = new ClothRepository();
+	
+	public ClothRepository getinstance() {
+		return instance;
+	}
 	
 	public ClothRepository() {
 		
@@ -47,6 +52,10 @@ public class ClothRepository {
 			}
 		}
 		return cloth;
+	}
+	
+	public void addCloth(Cloth cloth) {
+		listOfCloth.add(cloth);
 	}
 	
 }
