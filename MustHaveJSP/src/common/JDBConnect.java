@@ -38,7 +38,6 @@ public class JDBConnect {
 			
 		} catch (Exception e) {
 			System.out.println("2번 데이터 베이스 연결 오류입니다");
-			e.printStackTrace();
 		}
 	}
 	
