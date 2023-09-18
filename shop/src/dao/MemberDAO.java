@@ -24,6 +24,8 @@ public class MemberDAO extends SQLConnect {
 				dto.setId(rs.getString(1));
 				dto.setName(rs.getString(2));
 				dto.setPw(rs.getString(3));
+				dto.setPhone(rs.getString(4));
+				dto.setAddress(rs.getString(5));
 			}
 		} catch(Exception e){
 			System.out.println("getDTO 오류");

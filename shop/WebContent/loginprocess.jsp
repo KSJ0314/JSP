@@ -12,6 +12,8 @@
 	if (dto.getId() != null){
 		session.setAttribute("UserId", dto.getId());
 		session.setAttribute("UserName", dto.getName());
+		session.setAttribute("UserPhone", dto.getName());
+		session.setAttribute("UserAddress", dto.getName());
 	} else {
 		request.setAttribute("ErrorMessage", "아이디나 비밀번호가 일치하지 않습니다.");
 	}
