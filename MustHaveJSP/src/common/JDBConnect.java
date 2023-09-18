@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.servlet.ServletContext;
+
 public class JDBConnect {
 	public Connection con;	// DB 연결
 	public Statement stmt;	// 정적 쿼리문 사용
@@ -38,6 +40,23 @@ public class JDBConnect {
 			
 		} catch (Exception e) {
 			System.out.println("2번 데이터 베이스 연결 오류입니다");
+		}
+	}
+	
+	public JDBConnect(ServletContext application) {
+		try {
+			String driver = application.getInitParameter("OracleDriver");
+			String url = application.getInitParameter("OracleURL");
+			String id = application.getInitParameter("OracleId");
+			String pw = application.getInitParameter("OraclePwd");
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, id, pw);
+			
+			System.out.println("application db 연결 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("application db 연결 실패");
 		}
 	}
 	

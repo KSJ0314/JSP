@@ -22,5 +22,10 @@
 		JDBConnect jdbc2 = new JDBConnect(driver,url,id,pwd);
 		jdbc2.close();
 	%>
+	<h2>JDBC 테스트 3</h2>
+	<%
+		JDBConnect bDao = new JDBConnect(application);
+		bDao.close();
+	%>
 </body>
 </html>
