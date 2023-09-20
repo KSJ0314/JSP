@@ -32,6 +32,7 @@
 	<%  } else { %>
 		<h2><%=session.getAttribute("UserName") %>회원님, 로그인하셨습니다.</h2>
 		<a href="Logout.jsp">[로그아웃]</a>
+		<a href="../08Board/write.jsp">[글쓰기]</a>
 	<%	} %>
 </body>
 </html>

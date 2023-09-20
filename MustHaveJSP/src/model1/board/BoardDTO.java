@@ -56,7 +56,5 @@ public class BoardDTO {
 		this.name = name;
 	}
 	
-	
-	
 
 }
