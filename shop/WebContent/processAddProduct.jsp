@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="dto.Product"%>
-<%@ page import="dto.ProductRepository"%>
+<%@ page import="dto.productDTO"%>
+<%@ page import="dao.productDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +28,7 @@
 		
 		
 		
-		Product product = new Product();
+		productDTO product = new productDTO();
 		
 		product.setProductId(productId);
 		product.setPname(pname);
@@ -40,11 +40,11 @@
 		product.setCondition(condition);
 		
 		/* ProductRepository pr = (ProductRepository)session.getAttribute("pr"); */
-		ProductRepository pr = new ProductRepository().getInstance();
+		productDAO pr = new productDAO();
 		pr.addProduct(product);
+		pr.close();
 		
 		response.sendRedirect("products.jsp");
-		
 	%>
 </body>
 </html>

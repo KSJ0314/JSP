@@ -1,8 +1,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="dto.Product"%>
-<%@ page import="dto.ProductRepository"%>
+<%@ page import="dto.productDTO"%>
+<%@ page import="dao.productDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +21,16 @@
 	<div class="container">
 		<div class="row" align="center">
 			<%
-/* 				if(session.getAttribute("pr")==null){
-					session.setAttribute("pr", new ProductRepository());
-				}
-				ProductRepository pr = (ProductRepository)session.getAttribute("pr"); */
-				ProductRepository pr = new ProductRepository().getInstance();
-				
-				ArrayList<Product> listOfProduct = pr.getAllProducts();
-				for (Product lp : listOfProduct) {
-					String productId = lp.getProductId();
+				/* 				if(session.getAttribute("pr")==null){
+							session.setAttribute("pr", new ProductRepository());
+						}
+						ProductRepository pr = (ProductRepository)session.getAttribute("pr"); */
+						productDAO pr = new productDAO();
+						
+						ArrayList<productDTO> listOfProduct = pr.getAllProducts();
+						pr.close();
+						for (productDTO lp : listOfProduct) {
+							String productId = lp.getProductId();
 			%>
 					<div class="col-md-4">
 						<img src="resources/images/<%=productId %>.png" style="with: 100%">

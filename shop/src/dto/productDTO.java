@@ -2,7 +2,7 @@ package dto;
 
 import java.io.Serializable;
 
-public class Product implements Serializable {
+public class productDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -15,11 +15,11 @@ public class Product implements Serializable {
 	private long unitsInStock;	// 상품 재고 개수
 	private String condition;	// 상품 상태 (신상,중고,재생)
 	
-	public Product() {
+	public productDTO() {
 		super();
 	}
 
-	public Product(String productId, String pname, Integer unitPrice) {
+	public productDTO(String productId, String pname, Integer unitPrice) {
 		this.productId = productId;
 		this.pname = pname;
 		this.unitPrice = unitPrice;

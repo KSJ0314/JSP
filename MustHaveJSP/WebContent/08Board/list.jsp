@@ -65,7 +65,7 @@
 		%>
 		<tr>
 			<td align="center"><%=totalCount-- %></td>
-			<td align="left"><a href="#"><%=dto.getTitle() %></a></td>
+			<td align="left"><a href="view.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle() %></a></td>
 			<td align="center"><%=dto.getId() %></td>
 			<td align="center"><%=dto.getVisitcount() %></td>
 			<td align="center"><%=dto.getPostdate() %></td>

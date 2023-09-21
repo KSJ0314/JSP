@@ -1,8 +1,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="dto.Product"%>
-<%@ page import="dto.ProductRepository"%>
+<%@ page import="dto.productDTO"%>
+<%@ page import="dao.productDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +19,16 @@
 		</div>
 	</div>
 	<%
-/* 		ProductRepository pr = null;
+		/* 		ProductRepository pr = null;
 		if(session.getAttribute("pr")==null){
 			pr = new ProductRepository();
 		} else {
 			pr = (ProductRepository)session.getAttribute("pr");
 		} */
-		ProductRepository pr = new ProductRepository().getInstance();
+		productDAO pr = new productDAO();
 		String id = request.getParameter("id");
-		Product product = pr.getProductById(id);
+		productDTO product = pr.getProductById(id);
+		pr.close();
 	%>
 	<div class="container">
 		<div class="row">
