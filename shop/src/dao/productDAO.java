@@ -52,7 +52,6 @@ public class productDAO extends SQLConnect {
 	}
 	
 	public void addProduct(productDTO product) {
-		listOfProduct.add(product);
 		
 		String sql = "insert into product values(?,?,?,?,?,?,?,?)";
 		try {
