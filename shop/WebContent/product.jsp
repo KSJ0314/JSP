@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="dto.productDTO"%>
 <%@ page import="dao.productDAO"%>
+<%@ include file="loginCheck.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,14 +20,11 @@
 		</div>
 	</div>
 	<%
-		/* 		ProductRepository pr = null;
-		if(session.getAttribute("pr")==null){
-			pr = new ProductRepository();
-		} else {
-			pr = (ProductRepository)session.getAttribute("pr");
-		} */
-		productDAO pr = new productDAO();
 		String id = request.getParameter("id");
+		String uId = request.getParameter("uId");
+		String UserId = (String)session.getAttribute("UserId");
+
+		productDAO pr = new productDAO();
 		productDTO product = pr.getProductById(id);
 		pr.close();
 	%>
@@ -47,7 +45,10 @@
 				<p>상태 : <%=product.getCondition()%></p>
 				<p>
 					<a href="#" class="btn btn-info">상품 주문</a>
-					<a href="products.jsp" class="btn btn-secondary">상품 목록</a>
+					<% if (UserId != null && UserId.equals(uId)) { %>
+					<a href="UpdateProduct.jsp?id=<%=id %>&uId=<%=uId %>" class="btn btn-secondary">상품 수정</a>
+					<a href="deleteProductProcess.jsp?id=<%=id %>&uId=<%=uId %>" class="btn btn-secondary">상품 삭제</a>
+					<% } %>
 				</p>
 			</div>
 		</div>

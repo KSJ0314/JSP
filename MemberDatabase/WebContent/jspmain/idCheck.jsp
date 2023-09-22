@@ -1,4 +1,4 @@
-<%@page import="utils.JSFunction"%>
+<%@page import="common.JSFunction"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="common.MysqlConnect"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

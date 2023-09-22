@@ -14,6 +14,7 @@ public class productDTO implements Serializable {
 	private String category;	// 상품 분류
 	private long unitsInStock;	// 상품 재고 개수
 	private String condition;	// 상품 상태 (신상,중고,재생)
+	private String uId;	// 상품 작성자
 	
 	public productDTO() {
 		super();
@@ -88,7 +89,13 @@ public class productDTO implements Serializable {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
-	
-	
+
+	public String getUId() {
+		return uId;
+	}
+
+	public void setUId(String uId) {
+		this.uId = uId;
+	}
 	
 }

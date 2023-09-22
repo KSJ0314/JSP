@@ -1,3 +1,4 @@
+<%@page import="common.JSFunction"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="dto.productDTO"%>
@@ -11,6 +12,7 @@
 <body>
 	<%
 		request.setCharacterEncoding("utf-8");
+	
 		String productId = request.getParameter("productId");	
 		String pname = request.getParameter("pname");
 		Integer unitPrice = 0;
@@ -25,6 +27,7 @@
 			unitsInStock = Long.parseLong(request.getParameter("unitsInStock"));
 		}
 		String condition = request.getParameter("condition");
+		String uId = (String)session.getAttribute("UserId");
 		
 		
 		
@@ -38,13 +41,18 @@
 		product.setCategory(category);
 		product.setUnitsInStock(unitsInStock);
 		product.setCondition(condition);
+		product.setUId(uId);
 		
 		/* ProductRepository pr = (ProductRepository)session.getAttribute("pr"); */
 		productDAO pr = new productDAO();
-		pr.addProduct(product);
+		int addResult = pr.addProduct(product);
 		pr.close();
+		if (addResult == 1){
+			JSFunction.alertLocation("상품 추가 성공", "products.jsp", out);
+		} else {
+			JSFunction.alertBack("상품 추가 실패", out);
+		}
 		
-		response.sendRedirect("products.jsp");
 	%>
 </body>
 </html>

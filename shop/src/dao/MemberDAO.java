@@ -6,9 +6,9 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspWriter;
 
-import JDBC.SQLConnect;
+import common.JSFunction;
+import common.SQLConnect;
 import dto.MemberDTO;
-import utils.JSFunction;
 
 public class MemberDAO extends SQLConnect {
 	

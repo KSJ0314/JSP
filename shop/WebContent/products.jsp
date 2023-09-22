@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="dto.productDTO"%>
 <%@ page import="dao.productDAO"%>
+<%@ include file="loginCheck.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,16 +22,12 @@
 	<div class="container">
 		<div class="row" align="center">
 			<%
-				/* 				if(session.getAttribute("pr")==null){
-							session.setAttribute("pr", new ProductRepository());
-						}
-						ProductRepository pr = (ProductRepository)session.getAttribute("pr"); */
-						productDAO pr = new productDAO();
-						
-						ArrayList<productDTO> listOfProduct = pr.getAllProducts();
-						pr.close();
-						for (productDTO lp : listOfProduct) {
-							String productId = lp.getProductId();
+				productDAO pr = new productDAO();
+				ArrayList<productDTO> listOfProduct = pr.getAllProducts();
+				pr.close();
+				for (productDTO lp : listOfProduct) {
+					String productId = lp.getProductId();
+					String uId = lp.getUId();
 			%>
 					<div class="col-md-4">
 						<img src="resources/images/<%=productId %>.png" style="with: 100%">
@@ -39,7 +36,7 @@
 							<h3><%=lp.getDescription()%></h3>
 							<h3><%=lp.getUnitPrice()%></h3>
 						</div>
-						<p><a href="product.jsp?id=<%=productId%>"
+						<p><a href="product.jsp?id=<%=productId%>&uId=<%=uId %>"
 						class="btn btn-secondary" role="button">상세보기</a></p>
 					</div>
 			<%

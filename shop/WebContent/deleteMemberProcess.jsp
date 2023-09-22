@@ -1,6 +1,6 @@
 <%@page import="dao.MemberDAO"%>
 <%@page import="dto.MemberDTO"%>
-<%@page import="JDBC.SQLConnect"%>
+<%@page import="common.SQLConnect"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%

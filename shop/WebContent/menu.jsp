@@ -5,8 +5,8 @@
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="welcome.jsp">홈</a>
-				<a class="navbar-brand" href="products.jsp">상품정보</a>
 				<% if (session.getAttribute("UserId") != null) {%>
+				<a class="navbar-brand" href="products.jsp">상품정보</a>
 				<a class="navbar-brand" href="addProduct.jsp">상품등록</a>
 				<% } %>
 			</div>

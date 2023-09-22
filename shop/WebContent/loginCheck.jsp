@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	session.invalidate();
-	response.sendRedirect("welcome.jsp");
+	if (session.getAttribute("UserId") == null){
+		JSFunction.alertBack("회원만 방문 가능합니다.", out);
+		return;
+	}
 %>

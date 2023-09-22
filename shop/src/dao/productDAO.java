@@ -2,7 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 
-import JDBC.SQLConnect;
+import common.SQLConnect;
 import dto.productDTO;
 
 public class productDAO extends SQLConnect {
@@ -26,6 +26,7 @@ public class productDAO extends SQLConnect {
 				dto.setCategory(rs.getString("p_category"));
 				dto.setUnitsInStock(rs.getLong("p_unitsInStock"));
 				dto.setCondition(rs.getString("p_condition"));
+				dto.setUId(rs.getString("uId"));
 				
 				listOfProduct.add(dto);
 			}
@@ -51,26 +52,64 @@ public class productDAO extends SQLConnect {
 		return productById;
 	}
 	
-	public void addProduct(productDTO product) {
-		
+	public int addProduct(productDTO product) {
+		int result = 0;
 		String sql = "insert into product values(?,?,?,?,?,?,?,?)";
 		try {
 			psmt = co.prepareStatement(sql);
 			psmt.setString(1, product.getProductId());
 			psmt.setString(2, product.getPname());
-			psmt.setString(3, String.valueOf(product.getUnitPrice()));
+			psmt.setInt(3, product.getUnitPrice());
 			psmt.setString(4, product.getDescription());
 			psmt.setString(5, product.getManufacturer());
 			psmt.setString(6, product.getCategory());
-			psmt.setString(7, String.valueOf(product.getUnitsInStock()));
+			psmt.setLong(7, product.getUnitsInStock());
 			psmt.setString(8, product.getCondition());
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			
 			System.out.println("addProduct() 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("addProduct() 오류");
 		}
+		
+		return result;
+	}
+	
+	public void deleteProduct(String productId) {
+		String sql = "delete from product where p_id = ?";
+		try {
+			psmt = co.prepareStatement(sql);
+			psmt.setString(1, productId);
+			psmt.executeUpdate();
+			System.out.println("deleteProduct() 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("deleteProduct() 오류");
+		}
+	}
+	
+	public void updateProduct(String id, productDTO dto) {
+		String sql = "update product set p_id=?, p_name=?, p_unitPrice=?, p_description=?, p_manufacturer=?, p_category=?, p_unitsInStock=?, p_condition=? where p_id = ?";
+		try {
+			psmt = co.prepareStatement(sql);
+			psmt.setString(1, dto.getProductId());
+			psmt.setString(2, dto.getPname());
+			psmt.setInt(3, dto.getUnitPrice());
+			psmt.setString(4, dto.getDescription());
+			psmt.setString(5, dto.getManufacturer());
+			psmt.setString(6, dto.getCategory());
+			psmt.setLong(7, dto.getUnitsInStock());
+			psmt.setString(8, dto.getCondition());
+			psmt.setString(9, id);
+			psmt.executeUpdate();
+			
+			System.out.println("updateProduct() 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("updateProduct() 오류");
+		}
+		
 	}
 	
 }

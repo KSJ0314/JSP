@@ -3,7 +3,7 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="common.MysqlConnect"%>
-<%@page import="utils.JSFunction"%>
+<%@page import="common.JSFunction"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
