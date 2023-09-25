@@ -8,6 +8,7 @@
 				<% if (session.getAttribute("UserId") != null) {%>
 				<a class="navbar-brand" href="products.jsp">상품정보</a>
 				<a class="navbar-brand" href="addProduct.jsp">상품등록</a>
+				<a class="navbar-brand" href="boardMain.jsp">게시판</a>
 				<% } %>
 			</div>
 			<div class="navbar-header justify-content-end">
@@ -16,12 +17,12 @@
 				<% } %>
 				<% if (session.getAttribute("UserName") == null) {%>
 					<a class="navbar-brand" href="login.jsp">로그인</a>
+					<a class="navbar-brand" href="addMember.jsp">회원가입</a>
 				<% } else { %>
 					<a class="navbar-brand" href="logout.jsp">로그아웃</a>
 					<a class="navbar-brand" href="editMember.jsp">회원정보수정</a>
 					<a class="navbar-brand" href="deleteMember.jsp">회원탈퇴</a>
 				<% } %>
-				<a class="navbar-brand" href="addMember.jsp">회원가입</a>
 			</div>
 		</div>
 </nav>
