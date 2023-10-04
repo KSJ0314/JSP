@@ -42,17 +42,19 @@ public class BoardDAO extends JDBConnect {
 	public List<BoardDTO> selectList(Map<String, Object> map){
 		List<BoardDTO> bbs = new Vector<>();
 		
-		String query = "select * from board";
+		String query = "select * from (select board.*, rownum rNum from board ";
 		
 		if(map.get("searchWord") != null) {	// 검색하는 단어가 있다면
 			query += " where " + map.get("searchField") + " "
 					+ "like '%" + map.get("searchWord") + "%'";
 		}
-		query += " order by num desc";
+		query += " order by num desc) where rNum between ? and ?";
 		
 		try {
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(query);
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, map.get("start").toString());
+			psmt.setString(2, map.get("end").toString());
+			rs = psmt.executeQuery();
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
 				dto.setNum(rs.getString("num"));

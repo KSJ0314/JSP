@@ -5,18 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
-	function validateForm(form) {
-		if (!form.user_id.value){
-			alert("아이디를 입력하세요.");
-			return false;
-		}
-		if (!form.user_pw.value) {
-			alert("패스워드를 입력하세요");
-			return false;
-		}
-	}
-</script>
 </head>
 <body>
 	<h2>로그인 페이지</h2>
@@ -24,13 +12,13 @@
 		<%=request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %>
 	</span>
 	<%	if (session.getAttribute("UserId") == null) {	%>
-		<form action="LoginProcess.jsp" method="post" name="loginFrm" onsubmit="return validateForm(this)">
-			아이디 : <input type="text" name="user_id"><br>
-			비밀번호 : <input type="password" name="user_pw"><br>
+		<form action="LoginProcess.jsp" method="post" name="loginFrm">
+			아이디 : <input type="text" name="user_id" required><br>
+			비밀번호 : <input type="password" name="user_pw" required><br>
 			<input type="submit" value="로그인하기">
 		</form>
 	<%  } else { %>
-		<h2><%=session.getAttribute("UserName") %>회원님, 로그인하셨습니다.</h2>
+		<h2>${sessionScope.UserName}회원님, 로그인하셨습니다.</h2>
 		<a href="Logout.jsp">[로그아웃]</a>
 		<a href="../08Board/write.jsp">[글쓰기]</a>
 		<a href="../08Board/list.jsp">[목록보기]</a>

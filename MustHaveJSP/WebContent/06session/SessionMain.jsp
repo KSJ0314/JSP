@@ -22,6 +22,7 @@
 	<ul>
 		<li>세션 유지 시간 : <%=session.getMaxInactiveInterval() %></li>
 		<li>세션 아이디 : <%=session.getId() %></li>
+		<li>세션 아이디 : <%=session.getId() %></li>
 		<li>세션 요청 시각 : <%=creationTimeStr %></li>
 		<li>마지막 요청 시각 : <%=lastTimeStr %></li>
 	</ul>
