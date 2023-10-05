@@ -34,24 +34,46 @@ public class BoardDAO extends SQLConnect {
 		return count;
 	}
 	
-	public List<BoardDTO> selectBoard() {
+	// 게시물 마지막 번호 반환
+	public int maxNum() {
+		int count = 0;
+		
+		String sql = "select max(num) from board";
+		try {
+			stmt = co.createStatement();
+			rs = stmt.executeQuery(sql);
+			rs.next();
+			count = rs.getInt(1);
+			System.out.println("maxNum() 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("maxNum() 오류");
+		}
+		
+		return count;
+	}
+	
+	public List<BoardDTO> selectBoard(int start, int post_page) {
 		List<BoardDTO> listOfBoardDTO = new ArrayList<>();
 		
-		String sql = "select * from board order by num desc";
+		String sql = "select * from board order by num desc ";
 		
 		try {
 			stmt = co.createStatement();
 			rs = stmt.executeQuery(sql);
-			while(rs.next()) {
-				BoardDTO dto = new BoardDTO();
-				dto.setNum(rs.getString(1));
-				dto.setTitle(rs.getString(2));
-				dto.setContent(rs.getString(3));
-				dto.setId(rs.getString(4));
-				dto.setPostdate(rs.getDate(5));
-				dto.setVisitcount(rs.getInt(6));
-				listOfBoardDTO.add(dto);
+			rs.absolute(start);
+			for (int i = 0; i < post_page; i++) {
+		 		BoardDTO dto = new BoardDTO();
+		 		dto.setNum(rs.getString(1));
+		 		dto.setTitle(rs.getString(2));
+		 		dto.setContent(rs.getString(3));
+		 		dto.setId(rs.getString(4));
+		 		dto.setPostdate(rs.getDate(5));
+		 		dto.setVisitcount(rs.getInt(6));
+		 		listOfBoardDTO.add(dto);
+		 		rs.next();
 			}
+			
 			System.out.println("selectBoard() 성공");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,3 +1,4 @@
+<%@page import="common.BoardPaging"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,8 +7,21 @@
     pageEncoding="UTF-8"%>
 <%
 	BoardDAO dao = new BoardDAO();
-	int count = dao.selectCount();
-	List<BoardDTO> listOfBoard = dao.selectBoard();
+	
+	int total_count = dao.selectCount();
+	int post_page = Integer.parseInt(application.getInitParameter("POST_PAGE"));
+	int block_count = Integer.parseInt(application.getInitParameter("BLOCK_COUNT"));
+	int total_page = (int)Math.ceil((double)total_count / post_page);
+	
+	int num = 1;
+	if (request.getParameter("num") != null) {
+		num = Integer.parseInt(request.getParameter("num"));
+	}
+	
+	int start = (num-1) * post_page + 1;
+	int count = total_count - start + 1;
+	
+	List<BoardDTO> listOfBoard = dao.selectBoard(start, post_page);
 	dao.close();
 %>
 <!DOCTYPE html>
@@ -15,6 +29,15 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
+<style>
+	#page{
+		color: red;
+	}
+	#page a {
+		color: black;
+		text-decoration: none;
+	}
+</style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -43,6 +66,19 @@
 				<td><%=dto.getPostdate() %></td>
 			</tr>
 			<% } %>
+		</table>
+		<table border="1" width="100%" style="border-top: none;">
+			<tr id="page">
+				<td align="right" style="border: none;" width="32.5%">
+					<%=BoardPaging.leftStr(num) %>
+				</td>
+				<td align="center" style="border: none;"  width="35%">
+					<%=BoardPaging.centerStr(num, block_count, total_page) %>
+				</td>
+				<td style="border: none;"  width="32.5%">
+					<%=BoardPaging.rightStr(num, total_page) %>
+				</td>
+			</tr>
 		</table>
 		<button type="button" onclick="location.href='write.jsp;'" style="float: right; margin-top: 10px">글쓰기</button>
 	</div>

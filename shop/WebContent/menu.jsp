@@ -8,7 +8,7 @@
 				<% if (session.getAttribute("UserId") != null) {%>
 				<a class="navbar-brand" href="products.jsp">상품정보</a>
 				<a class="navbar-brand" href="addProduct.jsp">상품등록</a>
-				<a class="navbar-brand" href="boardMain.jsp">게시판</a>
+				<a class="navbar-brand" href="boardMain.jsp?num=1">게시판</a>
 				<% } %>
 			</div>
 			<div class="navbar-header justify-content-end">
