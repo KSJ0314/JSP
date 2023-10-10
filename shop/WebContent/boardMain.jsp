@@ -5,10 +5,14 @@
 <%@page import="dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+	String sel = (String)session.getAttribute("sel");
+	String search = (String)session.getAttribute("search");
+
 	BoardDAO dao = new BoardDAO();
 	
-	int total_count = dao.selectCount();
+	int total_count = dao.selectCount(sel, search);
 	int post_page = Integer.parseInt(application.getInitParameter("POST_PAGE"));
 	int block_count = Integer.parseInt(application.getInitParameter("BLOCK_COUNT"));
 	int total_page = (int)Math.ceil((double)total_count / post_page);
@@ -21,7 +25,7 @@
 	int start = (num-1) * post_page + 1;
 	int count = total_count - start + 1;
 	
-	List<BoardDTO> listOfBoard = dao.selectBoard(start, post_page);
+	List<BoardDTO> listOfBoard = dao.selectBoard(start, post_page, sel, search);
 	dao.close();
 %>
 <!DOCTYPE html>
@@ -57,15 +61,29 @@
 				<th width="10%">조회수</th>
 				<th width="15%">작성일</th>
 			</tr>
-			<% for (BoardDTO dto : listOfBoard) {%>
+			
+			<c:forEach var="listOfBoard" items="<%=listOfBoard %>">
 			<tr>
 				<td><%=count-- %></td>
-				<td><a href="view.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle() %></a></td>
-				<td><%=dto.getId() %></td>
-				<td><%=dto.getVisitcount() %></td>
-				<td><%=dto.getPostdate() %></td>
+				<td><a href="view.jsp?num=${listOfBoard.num }">${listOfBoard.title }</a></td>
+				<td>${listOfBoard.id }</td>
+				<td>${listOfBoard.visitcount }</td>
+				<td>${listOfBoard.postdate }</td>
 			</tr>
-			<% } %>
+			</c:forEach>
+			
+			<tr>
+				<td colspan="5">
+					<form action="boardMainProcess.jsp">
+						<select name="sel">
+							<option value="title">제목</option>
+							<option value="id">아이디</option>
+						</select>
+						<input type="text" name="search">
+						<input type="submit" value="검색">
+					</form>
+				</td>
+			</tr>
 		</table>
 		<table border="1" width="100%" style="border-top: none;">
 			<tr id="page">

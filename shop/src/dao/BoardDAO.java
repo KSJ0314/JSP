@@ -16,10 +16,13 @@ public class BoardDAO extends SQLConnect {
 	}
 	
 	// 게시물 개수 반환
-	public int selectCount() {
+	public int selectCount(String sel, String search) {
 		int count = 0;
 		
 		String sql = "select count(*) from board";
+		if (search != null) {
+			sql += " where "+sel+" like '%"+search+"%'";
+		}
 		try {
 			stmt = co.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -53,10 +56,14 @@ public class BoardDAO extends SQLConnect {
 		return count;
 	}
 	
-	public List<BoardDTO> selectBoard(int start, int post_page) {
+	public List<BoardDTO> selectBoard(int start, int post_page, String sel, String search) {
 		List<BoardDTO> listOfBoardDTO = new ArrayList<>();
 		
-		String sql = "select * from board order by num desc ";
+		String sql = "select * from board";
+		if (search != null) {
+			sql += " where "+sel+" like '%"+search+"%'";
+		}
+		sql += " order by num desc";
 		
 		try {
 			stmt = co.createStatement();

@@ -1,3 +1,5 @@
+<%@page import="common.Car"%>
+<%@page import="common.Person"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -21,6 +23,24 @@
 		<li>elVar : ${elVar }</li>
 		<li>expVar : ${expVar }</li>
 		<li>오늘날짜 : ${today }</li>
+	</ul>
+	
+	<h3>자바빈즈 생성1 - 생성자 사용</h3>
+	<c:set var="personVar1" value='<%=new Person("박문수", 50) %>' scope="request" />
+	<ul>
+		<li>이름 : ${requestScope.personVar1.name }</li>
+		<li>나이 : ${requestScope.personVar1.age }</li>
+	</ul>
+	
+	<h3>자바빈즈 생성2 - 생성자 사용</h3>
+	<c:set var="carVar1" value='<%=new Car() %>' scope="request" />
+		<c:set target="${carVar1 }" property="carName" value="제네시스" />
+		<c:set target="${carVar1 }" property="carPrice" value="200000000" />
+		<c:set target="${carVar1 }" property="carColor" value="검정" />
+	<ul>
+		<li>모델명 : ${requestScope.carVar1.carName }</li>
+		<li>가격 : ${requestScope.carVar1.carPrice }</li>
+		<li>색상 : ${requestScope.carVar1.carColor }</li>
 	</ul>
 </body>
 </html>
