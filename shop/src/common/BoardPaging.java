@@ -1,7 +1,20 @@
 package common;
 
 public class BoardPaging {
-
+	
+	public static String leftStr(int num) {
+		String str = "";
+		
+		if(num>1) {
+			str += "<a href='boardMain.jsp?num=1'>&lt;&lt; 첫 페이지</a>";
+			str += "&emsp;";
+			str += "<a href='boardMain.jsp?num="+(num-1)+"'>&lt; 이전</a>";
+			str += "&emsp;";
+		}
+		
+		return str;
+	}
+	
 	public static String centerStr(int num, int block_count, int total_page) {
 		String str = "";
 		int page_count = (num-1)/block_count*block_count + 1;
@@ -18,18 +31,6 @@ public class BoardPaging {
 		return str;
 	}
 	
-	public static String leftStr(int num) {
-		String str = "";
-		
-		if(num>1) {
-			str += "<a href='boardMain.jsp?num=1'>&lt;&lt; 첫 페이지</a>";
-			str += "&emsp;";
-			str += "<a href='boardMain.jsp?num="+(num-1)+"'>&lt; 이전</a>";
-			str += "&emsp;";
-		}
-		
-		return str;
-	}
 	public static String rightStr(int num, int total_page) {
 		String str = "";
 		
