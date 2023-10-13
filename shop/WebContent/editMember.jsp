@@ -28,6 +28,7 @@
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = dao.getDTO(id, pw);
 		dao.close();
+		
 		String saveDirectory = "Uploads/"+dto.getPhotoImage();
 	%>
 	<%@ include file="menu.jsp" %>
