@@ -1,7 +1,7 @@
-<%@page import="fileupload.MyfileDAO"%>
-<%@page import="fileupload.MyfileDTO"%>
-<%@page import="java.io.File"%>
-<%@page import="java.text.SimpleDateFormat"%>
+<%@ page import="fileupload.MyfileDAO"%>
+<%@ page import="fileupload.MyfileDTO"%>
+<%@ page import="java.io.File"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
@@ -33,18 +33,20 @@
 		String ext = fileName.substring(fileName.lastIndexOf("."));	// 업로드한 파일 이름에서 확장자 추출
 		String now = new SimpleDateFormat("yyyyMMdd_HmsS").format(new java.util.Date());	// 현재 날짜 시간 저장
 		String newFileName = now + ext;	// 예) 장동건.jpg -> 20231012_154011973.jpg
+
+		// 실제 저장은 newFileName 1개
 		File oldFile = new File(saveDirectory+File.separator+fileName);
 		File newFile = new File(saveDirectory+File.separator+newFileName);
 		oldFile.renameTo(newFile);
 		
 		MyfileDTO dto = new MyfileDTO();
-		MyfileDAO dao = new MyfileDAO();
 		dto.setName(name);
 		dto.setTitle(title);
 		dto.setCate(cate);
 		dto.setOfile(fileName);
 		dto.setSfile(newFileName);
 		
+		MyfileDAO dao = new MyfileDAO();
 		dao.insertFile(dto);
 		dao.close();
 		

@@ -26,6 +26,7 @@ public class MemberDAO extends SQLConnect {
 				dto.setPw(rs.getString(3));
 				dto.setPhone(rs.getString(4));
 				dto.setAddress(rs.getString(5));
+				dto.setPhotoImage(rs.getString(6));
 			}
 		} catch(Exception e){
 			System.out.println("getDTO 오류");
@@ -49,12 +50,12 @@ public class MemberDAO extends SQLConnect {
 		return result;
 	}
 	
-	public void addDTO(String id, String name, String pw, String phone, String address, JspWriter out) {
+	public void addDTO(String id, String name, String pw, String phone, String address, String photoImage, JspWriter out) {
 		if (hasId(id)) {
 			JSFunction.alertLocation("아이디 중복","addMember.jsp", out);
 			return;
 		}
- 		String sql = "insert into member values(?,?,?,?,?)";
+ 		String sql = "insert into member values(?,?,?,?,?,?)";
 		try{
 			psmt = co.prepareStatement(sql);
 			psmt.setString(1, id);
@@ -62,6 +63,7 @@ public class MemberDAO extends SQLConnect {
 			psmt.setString(3, pw);
 			psmt.setString(4, phone);
 			psmt.setString(5, address);
+			psmt.setString(6, photoImage);
 			psmt.executeUpdate();
 			JSFunction.alertLocation("회원 가입 성공","loginprocess.jsp?id="+id+"&pw="+pw, out);
 		} catch(Exception e){

@@ -1,3 +1,5 @@
+<%@page import="dto.MemberDTO"%>
+<%@page import="dao.MemberDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.*"%>
@@ -19,8 +21,14 @@
 <body>
 	<%
 		String id = (String)session.getAttribute("UserId");
+		String pw = (String)session.getAttribute("UserPw");
 		String phone = (String)session.getAttribute("UserPhone");
 		String address = (String)session.getAttribute("UserAddress");
+		
+		MemberDAO dao = new MemberDAO();
+		MemberDTO dto = dao.getDTO(id, pw);
+		dao.close();
+		String saveDirectory = "Uploads/"+dto.getPhotoImage();
 	%>
 	<%@ include file="menu.jsp" %>
 	<div class="jumbotron">
@@ -34,12 +42,18 @@
 			<form action="editMemberProcess.jsp" method="post">
 				<table style="margin: auto;">
 					<tr>
+						<td rowspan="6">
+						<img src="<%=saveDirectory%>">
+						&emsp;&emsp;&emsp;&emsp;
+						</td>
+					</tr>
+					<tr>
 						<td>아이디</td>
 						<td><input type="text" name="id" value="<%=id%>" disabled></td>
 					</tr>
 					<tr>
 						<td>비밀번호</td>
-						<td><input type="text" name="pw"></td>
+						<td><input type="text" name="pw" placeholder="비밀번호"></td>
 					</tr>
 					<tr>
 						<td>연락처</td>

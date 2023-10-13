@@ -1,5 +1,8 @@
 package fileupload;
 
+import java.util.List;
+import java.util.Vector;
+
 import common.JDBConnect;
 
 public class MyfileDAO extends JDBConnect {
@@ -31,4 +34,35 @@ public class MyfileDAO extends JDBConnect {
 		return result;
 	}
 
+	public List<MyfileDTO> myFileList(){
+		List<MyfileDTO> fileList = new Vector<>();
+		
+		String sql = "select * from myfile order by idx desc";
+		
+		try {
+			
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				MyfileDTO dto = new MyfileDTO();
+				dto.setIdx(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setCate(rs.getString(4));
+				dto.setOfile(rs.getString(5));
+				dto.setSfile(rs.getString(6));
+				dto.setPostdate(rs.getString(7));
+				fileList.add(dto);
+			}
+			
+			System.out.println("myFileList() 성공");
+		} catch (Exception e) {
+			System.out.println("myFileList() 오류");
+		}
+		
+		
+		return fileList;
+	}
+	
 }

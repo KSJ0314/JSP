@@ -26,27 +26,31 @@
 		</div>
 	</div>
 		<div class="container">
-			<form action="addMemberProcess.jsp" method="post">
+			<form action="addMemberProcess.jsp" method="post" enctype="multipart/form-data">
 				<table style="margin: auto;">
 					<tr>
 						<td>아이디</td>
-						<td><input type="text" name="id"></td>
+						<td><input type="text" name="id" required></td>
 					</tr>
 					<tr>
 						<td>이름</td>
-						<td><input type="text" name="name"></td>
+						<td><input type="text" name="name" required></td>
 					</tr>
 					<tr>
 						<td>비밀번호</td>
-						<td><input type="password" name="pw"></td>
+						<td><input type="password" name="pw" required></td>
 					</tr>
 					<tr>
 						<td>연락처</td>
-						<td><input type="text" name="phone"></td>
+						<td><input type="text" name="phone" required></td>
 					</tr>
 					<tr>
 						<td>주소</td>
-						<td><input type="text" name="address"></td>
+						<td><input type="text" name="address" required></td>
+					</tr>
+					<tr>
+						<td>사진</td>
+						<td><input type="file" name="photoImage" placeholder="사진"></td>
 					</tr>
 					<tr>
 						<td rowspan="2"><input type="submit" value="회원가입"></td>

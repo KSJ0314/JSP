@@ -11,9 +11,10 @@
 	MemberDTO dto = dao.getDTO(id, pw);
 	if (dto.getId() != null){
 		session.setAttribute("UserId", dto.getId());
+		session.setAttribute("UserPw", dto.getPw());
 		session.setAttribute("UserName", dto.getName());
-		session.setAttribute("UserPhone", dto.getName());
-		session.setAttribute("UserAddress", dto.getName());
+		session.setAttribute("UserPhone", dto.getPhone());
+		session.setAttribute("UserAddress", dto.getAddress());
 	} else {
 		request.setAttribute("ErrorMessage", "아이디나 비밀번호가 일치하지 않습니다.");
 	}
