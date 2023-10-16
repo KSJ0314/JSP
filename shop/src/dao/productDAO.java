@@ -27,6 +27,7 @@ public class productDAO extends SQLConnect {
 				dto.setUnitsInStock(rs.getLong("p_unitsInStock"));
 				dto.setCondition(rs.getString("p_condition"));
 				dto.setUId(rs.getString("uId"));
+				dto.setProductImage(rs.getString("p_productImage"));
 				
 				listOfProduct.add(dto);
 			}
@@ -54,7 +55,7 @@ public class productDAO extends SQLConnect {
 	
 	public int addProduct(productDTO product) {
 		int result = 0;
-		String sql = "insert into product values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into product values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			psmt = co.prepareStatement(sql);
 			psmt.setString(1, product.getProductId());
@@ -65,6 +66,8 @@ public class productDAO extends SQLConnect {
 			psmt.setString(6, product.getCategory());
 			psmt.setLong(7, product.getUnitsInStock());
 			psmt.setString(8, product.getCondition());
+			psmt.setString(9, product.getuId());
+			psmt.setString(10, product.getProductImage());
 			result = psmt.executeUpdate();
 			
 			System.out.println("addProduct() 성공");

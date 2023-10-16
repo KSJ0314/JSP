@@ -108,5 +108,24 @@
 		<param-value>5</param-value>
 	</context-param>
 	
-
+	<servlet>
+		<servlet-name>HelloServlet</servlet-name>
+		<servlet-class>servlet.HelloServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/13Servlet/HelloServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>servlet.Login</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/13Servlet/Login.do</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

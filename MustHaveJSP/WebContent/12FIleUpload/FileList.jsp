@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="fileupload.MyfileDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="fileupload.MyfileDAO"%>
@@ -27,18 +28,21 @@
 			<th>원본 파일명</th>
 			<th>저장된 파일명</th>
 			<th>작성일</th>
+			<th>다운로드</th>
 		</tr>
-		<c:forEach var="i" items="<%=fileList %>">
+		<% for (MyfileDTO f : fileList) { %>
+		<c:set var="f" value="<%=f %>" />
 			<tr>
-				<td>${i.idx }</td>
-				<td>${i.name }</td>
-				<td>${i.title }</td>
-				<td>${i.cate }</td>
-				<td>${i.ofile }</td>
-				<td>${i.sfile }</td>
-				<td>${i.postdate }</td>
+				<td><%=f.getIdx() %></td>
+				<td><%=f.getName() %></td>
+				<td><%=f.getTitle() %></td>
+				<td><%=f.getCate() %></td>
+				<td><%=f.getOfile() %></td>
+				<td><%=f.getSfile() %></td>
+				<td><%=f.getPostdate() %></td>
+				<td><a href="Download.jsp?oName=<%=URLEncoder.encode(f.getOfile(),"utf-8")%>&sName=<%=URLEncoder.encode(f.getSfile(), "utf-8")%>">다운</a></td>
 			</tr>
-		</c:forEach>
+		<% } %>
 	</table>
 </body>
 </html>

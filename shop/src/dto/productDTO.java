@@ -1,11 +1,7 @@
 package dto;
 
-import java.io.Serializable;
-
-public class productDTO implements Serializable {
+public class productDTO {
 	
-	private static final long serialVersionUID = 1L;
-
 	private String productId;	// 상품 아이디
 	private String pname;		// 상품명
 	private Integer unitPrice;	// 상품 가격
@@ -15,6 +11,7 @@ public class productDTO implements Serializable {
 	private long unitsInStock;	// 상품 재고 개수
 	private String condition;	// 상품 상태 (신상,중고,재생)
 	private String uId;	// 상품 작성자
+	private String productImage;// 상품 사진
 	
 	public productDTO() {
 		super();
@@ -97,5 +94,22 @@ public class productDTO implements Serializable {
 	public void setUId(String uId) {
 		this.uId = uId;
 	}
+
 	
+	public String getuId() {
+		return uId;
+	}
+
+	public void setuId(String uId) {
+		this.uId = uId;
+	}
+
+	public String getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
+	}
+
 }

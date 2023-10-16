@@ -4,6 +4,12 @@
 <%@ page import="dto.productDTO"%>
 <%@ page import="dao.productDAO"%>
 <%@ include file="loginCheck.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	productDAO pr = new productDAO();
+	ArrayList<productDTO> listOfProduct = pr.getAllProducts();
+	pr.close();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,27 +27,18 @@
 	</div>
 	<div class="container">
 		<div class="row" align="center">
-			<%
-				productDAO pr = new productDAO();
-				ArrayList<productDTO> listOfProduct = pr.getAllProducts();
-				pr.close();
-				for (productDTO lp : listOfProduct) {
-					String productId = lp.getProductId();
-					String uId = lp.getUId();
-			%>
-					<div class="col-md-4">
-						<img src="resources/images/<%=productId %>.png" style="with: 100%">
-						<div id="box">
-							<h3><%=lp.getPname()%></h3>
-							<h3><%=lp.getDescription()%></h3>
-							<h3><%=lp.getUnitPrice()%></h3>
-						</div>
-						<p><a href="product.jsp?id=<%=productId%>&uId=<%=uId %>"
-						class="btn btn-secondary" role="button">상세보기</a></p>
+			<c:forEach var="lp" items="<%=listOfProduct%>">
+				<div class="col-md-4">
+					<img src="resources/images/${lp.productImage}" style="with: 300px; height: 200px;">
+					<div id="box">
+						<h3>${lp.pname}</h3>
+						<h3>${lp.description}</h3>
+						<h3>${lp.unitPrice}</h3>
 					</div>
-			<%
-				}
-			%>
+					<p><a href="product.jsp?id=${lp.productId}&uId=${lp.uId}"
+					class="btn btn-secondary" role="button">상세보기</a></p>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	<%@ include file="footer.jsp"%>

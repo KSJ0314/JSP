@@ -1,8 +1,11 @@
+<%@page import="java.io.File"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="common.JSFunction"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="dto.productDTO"%>
 <%@ page import="dao.productDAO"%>
+<%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,24 +14,31 @@
 </head>
 <body>
 	<%
-		request.setCharacterEncoding("utf-8");
+		// multipart/form-data 타입 form값 받기
+		String saveDirectory = application.getRealPath("/resources/images");
+		int maxSize = 1024 * 1024 * 5;
+		String enc = "utf-8";
+		MultipartRequest mr = new MultipartRequest(request, saveDirectory, maxSize, enc, new DefaultFileRenamePolicy());
 	
-		String productId = request.getParameter("productId");	
-		String pname = request.getParameter("pname");
-		Integer unitPrice = 0;
-		if (!request.getParameter("unitPrice").isEmpty()){
-			unitPrice = Integer.valueOf(request.getParameter("unitPrice"));	
-		}
-		String description = request.getParameter("description");	
-		String manufacturer = request.getParameter("manufacturer");
-		String category = request.getParameter("category");
-		long unitsInStock = 0;
-		if (!request.getParameter("unitsInStock").isEmpty()){
-			unitsInStock = Long.parseLong(request.getParameter("unitsInStock"));
-		}
-		String condition = request.getParameter("condition");
-		String uId = (String)session.getAttribute("UserId");
 		
+		String productId = mr.getParameter("productId");	
+		String pname = mr.getParameter("pname");
+		Integer unitPrice = 0;
+		if (!mr.getParameter("unitPrice").isEmpty()){
+			unitPrice = Integer.valueOf(mr.getParameter("unitPrice"));	
+		}
+		String description = mr.getParameter("description");	
+		String manufacturer = mr.getParameter("manufacturer");
+		String category = mr.getParameter("category");
+		long unitsInStock = 0;
+		if (!mr.getParameter("unitsInStock").isEmpty()){
+			unitsInStock = Long.parseLong(mr.getParameter("unitsInStock"));
+		}
+		String condition = mr.getParameter("condition");
+		String uId = (String)session.getAttribute("UserId");
+		String productImage = mr.getFilesystemName("productImage");
+		
+		File file = new File(saveDirectory+File.separator+productImage);
 		
 		
 		productDTO product = new productDTO();
@@ -42,6 +52,7 @@
 		product.setUnitsInStock(unitsInStock);
 		product.setCondition(condition);
 		product.setUId(uId);
+		product.setProductImage(productImage);
 		
 		/* ProductRepository pr = (ProductRepository)session.getAttribute("pr"); */
 		productDAO pr = new productDAO();

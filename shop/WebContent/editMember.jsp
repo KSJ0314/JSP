@@ -5,6 +5,18 @@
 <%@page import="java.time.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String id = (String)session.getAttribute("UserId");
+	String pw = (String)session.getAttribute("UserPw");
+	String phone = (String)session.getAttribute("UserPhone");
+	String address = (String)session.getAttribute("UserAddress");
+	
+	MemberDAO dao = new MemberDAO();
+	MemberDTO dto = dao.getDTO(id, pw);
+	dao.close();
+	
+	String saveDirectory = "Uploads/"+dto.getPhotoImage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,18 +31,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<%
-		String id = (String)session.getAttribute("UserId");
-		String pw = (String)session.getAttribute("UserPw");
-		String phone = (String)session.getAttribute("UserPhone");
-		String address = (String)session.getAttribute("UserAddress");
-		
-		MemberDAO dao = new MemberDAO();
-		MemberDTO dto = dao.getDTO(id, pw);
-		dao.close();
-		
-		String saveDirectory = "Uploads/"+dto.getPhotoImage();
-	%>
 	<%@ include file="menu.jsp" %>
 	<div class="jumbotron">
 		<div class="container">
