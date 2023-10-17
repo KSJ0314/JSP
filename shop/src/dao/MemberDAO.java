@@ -12,6 +12,10 @@ import dto.MemberDTO;
 
 public class MemberDAO extends SQLConnect {
 	
+	public MemberDAO() {
+		super();
+	}
+
 	public MemberDTO getDTO(String id, String pw) {
 		MemberDTO dto = new MemberDTO();
 		String sql = "select * from member where id=? and pw=?";

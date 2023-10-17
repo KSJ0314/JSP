@@ -1,10 +1,12 @@
 package membership;
 
-import java.sql.PreparedStatement;
-
 import common.JDBConnect;
 
 public class MemberDAO extends JDBConnect {
+	
+	public MemberDAO() {
+		super();
+	}
 	
 	public MemberDAO(String drv, String url, String id, String pw) {
 		super(drv,url,id,pw);
