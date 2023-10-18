@@ -53,13 +53,15 @@
 				<c:forEach var="dto" items="${boardList}" varStatus="dtoSt">
 					<tr align="center">
 						<td>${map.totalCount - (((map.pageNum-1)*map.pageSize)+dtoSt.index)}</td>
-						<td align="left"><a href="View.jsp?idx=${dto.idx}">${dto.title}</a></td>
+						<td align="left">
+							<a href="../mvcboard/view.do?idx=${dto.idx}">${dto.title}</a>
+						</td>
 						<td>${dto.name}</td>
 						<td>${dto.visitcount}</td>
 						<td>${dto.postdate}</td>
 						<td>
 							<c:if test="${not empty dto.ofile}">
-								<a href="../mvcboard/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}">[다운로드]</a>
+								<a href="../mvcboard/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}">[다운]</a>
 							</c:if>
 						</td>
 					</tr>

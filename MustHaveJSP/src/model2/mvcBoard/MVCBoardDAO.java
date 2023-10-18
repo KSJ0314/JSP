@@ -75,12 +75,15 @@ public class MVCBoardDAO extends JDBConnect {
 	
 	public int insertWrite(MVCBoardDTO dto) {
 		int result = 0;
-		String sql = "insert into mvcBoard (idx, name, title, content, visitcount) values (seq_board_num.NEXTVAL,?,?,?,0)";
+		String sql = "insert into mvcBoard (idx, name, title, content, ofile, sfile, pw) values (seq_board_num.NEXTVAL,?,?,?,?,?,?)";
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, dto.getName());
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getOfile());
+			psmt.setString(5, dto.getSfile());
+			psmt.setString(6, dto.getPw());
 			result = psmt.executeUpdate();
 			
 			System.out.println("insertWrite() 성공");
@@ -109,10 +112,10 @@ public class MVCBoardDAO extends JDBConnect {
 			dto.setTitle(rs.getString("title"));
 			dto.setContent(rs.getString("content"));
 			dto.setPostdate(rs.getDate("postdate"));
-			dto.setOfile(rs.getString("postdate"));
-			dto.setSfile(rs.getString("postdate"));
-			dto.setDowncount(rs.getInt("visitcount"));
-			dto.setPw(rs.getString("postdate"));
+			dto.setOfile(rs.getString("ofile"));
+			dto.setSfile(rs.getString("sfile"));
+			dto.setDowncount(rs.getInt("downcount"));
+			dto.setPw(rs.getString("pw"));
 			dto.setVisitcount(rs.getInt("visitcount"));
 			
 			System.out.println("selectView() 성공");
@@ -134,6 +137,20 @@ public class MVCBoardDAO extends JDBConnect {
 			System.out.println("updateVisitCount() 성공");
 		} catch (Exception e) {
 			System.out.println("updateVisitCount() 오류");
+		}
+	}
+	
+	// 첨부파일 조회수 증가
+	public void downCountPlus(String idx) {
+		String sql = "update mvcBoard set downcount = downcount+1 where idx=?";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			psmt.executeQuery();
+			
+			System.out.println("downCountPlus() 성공");
+		} catch (Exception e) {
+			System.out.println("downCountPlus() 오류");
 		}
 	}
 	
