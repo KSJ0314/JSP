@@ -167,6 +167,16 @@
 		<param-name>maxPostSize</param-name>
 		<param-value>1048576</param-value>
 	</context-param>
+			
+	<servlet>
+		<servlet-name>MVCBoardPass</servlet-name>
+		<servlet-class>model2.mvcBoard.PassController</servlet-class>
+	</servlet>
 	
+	<servlet-mapping>
+		<servlet-name>MVCBoardPass</servlet-name>
+		<url-pattern>/mvcboard/pass.do</url-pattern>
+	</servlet-mapping>
+
 	
 </web-app>

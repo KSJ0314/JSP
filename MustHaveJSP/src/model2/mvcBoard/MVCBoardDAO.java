@@ -155,20 +155,23 @@ public class MVCBoardDAO extends JDBConnect {
 	}
 	
 	// 게시물 수정
-	public int updateEdit(MVCBoardDTO dto) {
+	public int updatePost(MVCBoardDTO dto) {
 		int result = 0;
-		String sql = "update mvcBoard set title=?, content=? where idx=?";
+		String sql = "update mvcBoard set title=?, name=?, content=?, ofile=?, sfile=? where idx=?";
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, dto.getTitle());
-			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getIdx());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getOfile());
+			psmt.setString(5, dto.getSfile());
+			psmt.setString(6, dto.getIdx());
 			result = psmt.executeUpdate();
 			
-			System.out.println("updateEdit() 성공");
+			System.out.println("updatePost() 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("updateEdit() 오류");
+			System.out.println("updatePost() 오류");
 		}
 		return result;
 	}

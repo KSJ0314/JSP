@@ -8,19 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
-	function deletePost() {
-		var confirmed = confirm("정말로 삭제하시겠습니까?");
-		if (confirmed) {
-			var form = document.writeFrm;
-			form.action = "../mvcboard/delete.do";
-			form.submit();
-		}
-	}
-</script>
 </head>
 <body>
-	<h2>파일 첨부형 비회원제 게시판 - 상세보기</h2>
+	<h2>파일 첨부형 비회원제 게시판 - 비밀번호 확인</h2>
 	<table border="1" width="90%">
 		<colgroup>
 			<col width="15%">

@@ -30,8 +30,8 @@
 		}
 		
 		String fileName = mr.getFilesystemName("attachedFile");	// 업로드한 파일 이름
-		String ext = fileName.substring(fileName.lastIndexOf("."));	// 업로드한 파일 이름에서 확장자 추출
 		String now = new SimpleDateFormat("yyyyMMdd_HmsS").format(new java.util.Date());	// 현재 날짜 시간 저장
+		String ext = fileName.substring(fileName.lastIndexOf("."));	// 업로드한 파일 이름에서 확장자 추출
 		String newFileName = now + ext;	// 예) 장동건.jpg -> 20231012_154011973.jpg
 
 		// 실제 저장은 newFileName 1개

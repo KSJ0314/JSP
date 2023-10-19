@@ -18,7 +18,6 @@ public class FileUtil {
 		
 		try {
 			mr = new MultipartRequest(request, saveDirectory, maxPostSize, "utf-8");
-			System.out.println("uploadFile() 성공");
 		} catch (Exception e) {
 			System.out.println("uploadFile() 실패");
 			e.printStackTrace();
@@ -32,6 +31,8 @@ public class FileUtil {
 		try {
 			File file = new File(sd, sfile);
 			InputStream inStream = new FileInputStream(file);
+			
+			ofile = new String(ofile.getBytes("utf-8"), "ISO-8859-1");
 			
 			// 응답 헤더 초기화
 			response.reset();
@@ -52,7 +53,17 @@ public class FileUtil {
 			outStream.close();
 			
 		} catch (Exception e) {
+			System.out.println("download() 실패");
+			e.printStackTrace();
 		}
+	}
+	public static void deleteFile(HttpServletRequest request, String saveDirectory, String sfile) {
+		String sd = request.getServletContext().getRealPath(saveDirectory);
+		File file = new File(sd + File.separator + sfile);
+		if(file.exists()) {
+			file.delete();
+		}
+		
 	}
 	
 }
