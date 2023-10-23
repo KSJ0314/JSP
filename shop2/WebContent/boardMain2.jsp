@@ -15,7 +15,7 @@
 	int total_count = dao.selectCount(sel, search);
 	int post_page = Integer.parseInt(application.getInitParameter("POST_PAGE"));
 	int block_count = Integer.parseInt(application.getInitParameter("BLOCK_COUNT"));
-	int total_page = (int)Math.ceil((double)total_count / post_page);	// 올림
+	int total_page = (int)Math.ceil((double)total_count / post_page);
 	
 	int num = 1;
 	if (request.getParameter("num") != null) {
@@ -88,30 +88,15 @@
 			</tr>
 		</table>
 		<table border="1" width="100%" style="border-top: none;">
-			<c:set var="num" value="<%=num %>" />
-			<c:set var="total_page" value="<%=total_page %>" />
-			<c:url var="url" value="/boardMain.jsp" />
 			<tr id="page">
 				<td align="right" style="border: none;" width="32.5%">
-					<c:if test="${num>1}">
-						<a href='${url}?num=1'>&lt;&lt; 첫 페이지</a>&emsp;
-						<a href='${url}?num=${num-1}'>&lt; 이전</a>&emsp;
-					</c:if>
+					<%=BoardPaging.leftStr(num) %>
 				</td>
 				<td align="center" style="border: none;" width="35%">
-					<c:forEach var="i" begin="<%=st_pc %>" end="<%=st_pc+block_count-1 %>">
-						<c:choose>
-							<c:when test="${i > total_page}" />
-							<c:when test="${num eq i}"><a style="color: red;">[${i}]</a></c:when>
-							<c:otherwise><a href="${url}?num=${i}" style="color: black;">[${i}]</a></c:otherwise>
-						</c:choose>
-					</c:forEach>
+					<%=BoardPaging.centerStr(num, block_count, total_page) %>
 				</td>
 				<td style="border: none;"  width="32.5%">
-					<c:if test="${num<total_page}">
-						<a href='${url}?num=${num+1}'>다음 &gt;</a>&emsp;
-						<a href='${url}?num=${total_page}'>마지막 페이지 &gt;&gt;</a>&emsp;
-					</c:if>
+					<%=BoardPaging.rightStr(num, total_page) %>
 				</td>
 			</tr>
 		</table>

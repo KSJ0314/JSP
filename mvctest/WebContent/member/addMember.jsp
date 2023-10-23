@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="../menu.jsp" />
-	<form action="add" method="post">
+	<form action="add.member" method="post">
 		<table border="1">
 			<tr>
 				<td>아이디</td>

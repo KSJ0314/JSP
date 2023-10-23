@@ -10,7 +10,7 @@
 </head>
 <body>
 	<jsp:include page="../menu.jsp" />
-	<form action="login" method="post">
+	<form action="login.member" method="post">
 		<table border="1">
 			<tr>
 				<td>아이디</td>

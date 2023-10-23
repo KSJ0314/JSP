@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="../menu.jsp" />
-	<form action="delete" method="post">
+	<form action="delete.member" method="post">
 		<table border="1">
 			<tr>
 				<td>패스워드</td>

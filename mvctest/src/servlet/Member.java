@@ -32,19 +32,19 @@ public class Member extends HttpServlet {
 		String conPath = request.getContextPath();
 		String command = uri.substring(conPath.length());
 		
-		if(command.equals("/mvc/login")){
+		if(command.equals("/login.member")){
 			request.getRequestDispatcher("/member/login.jsp").forward(request, response);
-		} else if(command.equals("/mvc/add")){
+		} else if(command.equals("/add.member")){
 			request.getRequestDispatcher("/member/addMember.jsp").forward(request, response);
-		} else if(command.equals("/mvc/logout")){
+		} else if(command.equals("/logout.member")){
 			session.removeAttribute("UserId");
 			session.removeAttribute("UserName");
 			JSFunction.alertLocation(response, "로그아웃 성공", "/mvctest/main.jsp");
-		} else if(command.equals("/mvc/edit")){
+		} else if(command.equals("/edit.member")){
 			MemberShipDTO dto = dao.getDTO((String)session.getAttribute("UserId"));
 			request.setAttribute("dto", dto);
 			request.getRequestDispatcher("/member/editMember.jsp").forward(request, response);
-		} else if(command.equals("/mvc/delete")){
+		} else if(command.equals("/delete.member")){
 			request.getRequestDispatcher("/member/deleteMember.jsp").forward(request, response);
 		} 
 	}
@@ -58,7 +58,7 @@ public class Member extends HttpServlet {
 		String conPath = request.getContextPath();
 		String command = uri.substring(conPath.length());
 		
-		if(command.equals("/mvc/login")){
+		if(command.equals("/login.member")){
 			
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
@@ -72,7 +72,7 @@ public class Member extends HttpServlet {
 				JSFunction.alertBack(response, "로그인 실패");
 			}
 			
-		} else if(command.equals("/mvc/add")){
+		} else if(command.equals("/add.member")){
 			MemberShipDTO dto = new MemberShipDTO();
 			dto.setId(request.getParameter("id"));
 			dto.setPw(request.getParameter("pw"));
@@ -91,7 +91,7 @@ public class Member extends HttpServlet {
 			dao.insertDTO(dto);
 			
 			JSFunction.alertLocation(response, "회원가입 성공", "/mvctest/main.jsp");
-		} else if(command.equals("/mvc/edit")){
+		} else if(command.equals("/edit.member")){
 			
 			MemberShipDTO dto = new MemberShipDTO();
 			dto.setId(request.getParameter("id"));
@@ -112,7 +112,7 @@ public class Member extends HttpServlet {
 			session.setAttribute("UserId", dto.getId());
 			session.setAttribute("UserName", dto.getName());
 			JSFunction.alertLocation(response, "회원수정 성공", "/mvctest/main.jsp");
-		} else if(command.equals("/mvc/delete")){
+		} else if(command.equals("/delete.member")){
 			String id = (String)session.getAttribute("UserId");
 			String pw = request.getParameter("pw");
 			int result = dao.deleteDTO(id, pw);
