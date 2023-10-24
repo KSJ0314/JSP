@@ -9,7 +9,7 @@
 			<c:if test="${not empty UserId}" var="login">
 				<a class="navbar-brand" href="<c:url value='/products.jsp'/>">상품정보</a>
 				<a class="navbar-brand" href="<c:url value='/addProduct.jsp'/>">상품등록</a>
-				<a class="navbar-brand" href="<c:url value='/BoardListAction.board'/>">게시판</a>
+				<a class="navbar-brand" href="<c:url value='/list.board'/>">게시판</a>
 			</c:if>
 		</div>
 		<div class="navbar-header justify-content-end">

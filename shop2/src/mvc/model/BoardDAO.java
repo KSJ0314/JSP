@@ -80,4 +80,103 @@ public class BoardDAO extends BoardConnection {
 		return list;
 	}
 	
+	// 글쓰기
+	public void insertBoard(BoardDTO dto) {
+		String sql = "insert into board values (null, ?, ?, ?, ?, default, default, ?)";
+		
+		try {
+			psmt = co.prepareStatement(sql);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			psmt.setString(5, dto.getIp());
+			psmt.executeUpdate();
+			
+			System.out.println("insertBoard() 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("insertBoard() 오류");
+		}
+		
+	}
+	
+	public BoardDTO getDTO(String num) {
+		addHit(num);
+		BoardDTO dto = new BoardDTO();
+		
+		String sql = "select * from board where num="+num;
+		
+		try {
+			psmt = co.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setNum(rs.getInt(1));
+				dto.setId(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setTitle(rs.getString(4));
+				dto.setContent(rs.getString(5));
+				String date = new SimpleDateFormat("yyyy-MM-dd").format(rs.getDate(6));
+				dto.setRegist_day(date);
+				dto.setHit(rs.getInt(7));
+				dto.setIp(rs.getString(8));
+			}
+			
+			System.out.println("getDTO() 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getDTO() 오류");
+		}
+		
+		return dto;
+	}
+	
+	private void addHit(String num) {
+		String sql = "update board set hit = hit + 1 where num="+num;
+		
+		try {
+			psmt = co.prepareStatement(sql);
+			psmt.executeUpdate();
+			
+			System.out.println("addHit() 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("addHit() 오류");
+		}
+	}
+	
+	// 글수정
+	public void editBoard(BoardDTO dto, String num) {
+		String sql = "update board set title = ?, content = ? where num = ?";
+		
+		try {
+			psmt = co.prepareStatement(sql);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, num);
+			psmt.executeUpdate();
+			
+			System.out.println("editBoard() 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("editBoard() 오류");
+		}
+	}
+	
+	// 글삭제
+	public void deleteBoard(String num) {
+		String sql = "delete from board where num = ?";
+		
+		try {
+			psmt = co.prepareStatement(sql);
+			psmt.setString(1, num);
+			psmt.executeUpdate();
+			
+			System.out.println("deleteBoard() 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("deleteBoard() 오류");
+		}
+	}
 }
