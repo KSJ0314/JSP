@@ -43,13 +43,14 @@
 				<p>재고 : ${pr.unitsInStock}개</p>
 				<p>가격 : ${pr.unitPrice}원</p>
 				<p>상태 : ${pr.condition}</p>
-				<p>
-					<a href="#" class="btn btn-info">상품 주문</a>
+				<form action='<c:url value="/order.product" />' method="post">
+					<input type="number" name="order" min="1" max="${pr.unitsInStock }" step="1">
+					<input type="submit" class="btn btn-info" onclick="return confirm('---결제창---')" value="상품 주문">
 					<c:if test="${UserId != null && UserId eq param.uId }">
 						<a href="UpdateProduct.jsp?id=${param.id}&uId=${param.uId}" class="btn btn-secondary">상품 수정</a>
 						<a href="deleteProductProcess.jsp?id=${param.id}&uId=${param.uId}" class="btn btn-secondary">상품 삭제</a>
 					</c:if>
-				</p>
+				</form>
 			</div>
 		</div>
 	</div>

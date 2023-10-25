@@ -28,7 +28,6 @@ public class BoardController extends HttpServlet {
 		String uri = request.getRequestURI();	// 절대 경로 (현재 파일 이름 포함)
 		String Path = request.getContextPath();	// 절대 경로 (현재 파일 이름 미포함)
 		String command = uri.substring(Path.length()+1);	// 슬래시 제외 현재 파일 이름
-		RequestDispatcher rd = request.getRequestDispatcher("");
 		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");

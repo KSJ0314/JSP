@@ -18,8 +18,9 @@
 	</div>
 	<div class="container">
 		<form class="form-horizontal" action="<c:url value='/edit.board'/>" method="post">
-		<input type="hidden" name="num" value="${param.num }">
-		<input type="hidden" name="pageNum" value="${param.pageNum }">
+			<input type="hidden" name="num" value="${param.num }">
+			<input type="hidden" name="pageNum" value="${param.pageNum }">
+			
 			<div class="form-group row">
 				<label class="col-sm-2 control-label">이름</label>
 				<div class="col-sm-8">
@@ -57,14 +58,16 @@
 				</div>
 			</div>
 			<div>
+			
+			<c:url value='/delete.board?num=${param.num }&pageNum=${param.pageNum }' var="deleteAddr" />
+			<c:url value='/list.board?pageNum=${param.pageNum }' var="listAddr" />
 			<c:if test="${UserId == dto.id }">
-				<c:url value='/delete.board?num=${param.num }&pageNum=${param.pageNum }' var="deleteAddr" />
-				<input type="button" value="삭제" class="btn btn-danger" onclick="location.href='${deleteAddr}';">
+				<a href="${deleteAddr}" class="btn btn-danger" onclick="return confirm('정말로 삭제 하시겠습니까?')">삭제</a>
 				<input type="submit" value="수정" class="btn btn-success">
 			</c:if>
-				<c:url value='/list.board?pageNum=${param.pageNum }' var="listAddr" />
 				<input type="button" value="목록" class="btn btn-primary" onclick="location.href='${listAddr}';">
 			</div>
+			
 		</form>
 	</div>
 </body>
